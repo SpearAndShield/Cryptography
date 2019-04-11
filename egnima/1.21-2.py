@@ -5,7 +5,7 @@ alphebat={'A':0.08167,'B':0.01492,'C':0.02782,'D':0.04253,
 'O':0.07507,'P':0.01929,'Q':0.00095,'R':0.05987,'S':0.06327,
 'T':0.09056,'U':0.02758,'V':0.00978,'W':0.02360,'X':0.00150,
 'Y':0.01974,'Z':0.00074}
-def calculate(x):
+'''def calculate(x):
 	length=len(x)
 	dict={}
 	for i in x:
@@ -14,19 +14,26 @@ def calculate(x):
 		else:
 			dict[i]=1
 	M=[]
+	step,min=0,100
 	for i in range(0,26):
 		ans=0.0
 		for j in range(0,length):
-			temp=chr(ord(x[j])+i-26)
+			t=ord(x[j])+i
+			if t>90:
+				t=t-26
+			temp=chr(t)
+			if temp not in dict:
+				dict[temp]=0
 			ans=ans+alphebat[temp]*dict[temp]
 		M.append(ans/length)
-	ans=0.0
 	for i in M:
-		ans=ans+i
-	ans=ans/26
-	print ("M is "+str(ans))
+		temp=abs(i-0.065)
+		if temp<min:
+			min=temp
+			step=M.index(i)
+	print ("M is "+str(M[step])+" at "+str(step))
 	#print(dict)
-	'''ans=0.0
+	ans=0.0
 	for key,values in dict.items():
 		ans=ans+values*(values-1)
 	ans=ans/(length*(length-1))
@@ -41,7 +48,7 @@ def calculate(x):
 		while(k<len(text)):
 			y.append(text[k])
 			k=k+m
-		calculate(y)'''
+		calculate(y)
 #m=6
 for i in range(0,6):
 	y=[]
@@ -51,6 +58,13 @@ for i in range(0,6):
 		#print (text[j],j)
 		j=j+6
 	print("calculate string : "+''.join(y))
-	calculate(y)
+	calculate(y)'''
 
-	
+key=[2,17,24,15,19,14]
+ans=""
+for i in range(0,len(text)):
+	temp=ord(text[i])-key[i%6]
+	if temp<65:
+		temp=temp+26
+	ans=ans+chr(temp)
+print (ans)
